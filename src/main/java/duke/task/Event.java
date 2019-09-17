@@ -43,4 +43,17 @@ public class Event extends Task {
     public String writeToFile() {
         return String.format("E | %d | %s | %s",  (isCompleted() ? 1 : 0), this.getDescription(), this.at);
     }
+
+    /**
+     * Function to return at string.
+     * @return at string, which represents the date
+     */
+    @Override
+    public String getDate() {
+        return this.at;
+    }
+
+    public void setDate(String newDateTime) {
+        this.at = newDateTime;
+    }
 }

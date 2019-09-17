@@ -1,5 +1,6 @@
 package duke.task;
 
+
 public abstract class Task {
     private String description;
     private boolean isCompleted = false;
@@ -52,4 +53,8 @@ public abstract class Task {
     public abstract String getSymbol();
 
     public abstract String writeToFile();
+
+    public abstract String getDate();
+
+    public abstract void setDate(String newDate);
 }

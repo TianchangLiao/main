@@ -38,4 +38,15 @@ public class Todo extends Task {
     public String writeToFile() {
         return String.format("T | %d | %s",  (isCompleted() ? 1 : 0), this.getDescription());
     }
+
+    // does not apply for Todo
+    @Override
+    public String getDate() {
+        return null;
+    }
+
+    // does not apply for Todo
+    @Override
+    public void setDate(String newDate) {
+    }
 }

@@ -43,4 +43,17 @@ public class Deadline extends Task {
     public String writeToFile() {
         return String.format("D | %d | %s | %s",  (isCompleted() ? 1 : 0), this.getDescription(), this.by);
     }
+
+    /**
+     * Function to return at string.
+     * @return at string, which represents the date
+     */
+    @Override
+    public String getDate() {
+        return this.by;
+    }
+
+    public void setDate(String newDateTime) {
+        this.by = newDateTime;
+    }
 }

@@ -34,4 +34,9 @@ public class DukeResponse {
             + "Please try again. \n";
 
     public final String ADD = "Got it. I've added this task:\n";
+
+    public final String WRONG_TASKTYPE = "☹ OOPS!!! Snooze cannot be used for Todos.\n";
+
+    public final String SNOOZE_SUCCESS = "Noted. I've snoozed this task:\n";
+
 }

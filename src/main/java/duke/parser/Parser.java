@@ -16,9 +16,6 @@ public class Parser {
         if (splitStr.length == 1) {
             throw new DukeException("Invalid Command\n");
         }
-
-
-
         return new AddCommand(taskType, splitStr[0], splitStr[1]);
     }
 
@@ -68,9 +65,11 @@ public class Parser {
      * @throws NumberFormatException if command has characters.
      */
     private static Command parseSnooze(String command) throws NumberFormatException {
-        int index = Integer.parseInt(command);
-
-        return new SnoozeCommand(index);
+        String[] details = command.split(" ");
+        int index = Integer.parseInt(details[0]);
+        int value = Integer.parseInt(details[1]);
+        String units = details[2];
+        return new SnoozeCommand(index, value, units);
     }
     /**
      * Return the correct command given by user, Class method.
