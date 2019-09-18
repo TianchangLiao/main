@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Todo extends Task {
     private final String SYMBOL = "[T]";
 
@@ -40,6 +43,10 @@ public class Todo extends Task {
     }
 
     public String getDateTime() {
+        return null;
+    }
+
+    public LocalDateTime getLocalDate() {
         return null;
     }
 }

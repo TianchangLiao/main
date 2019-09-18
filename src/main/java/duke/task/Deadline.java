@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.DateFormatter;
 
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
     private final String SYMBOL = "[D]";
     private String by;
@@ -46,5 +48,11 @@ public class Deadline extends Task {
     @Override
     public String getDateTime() {
         return this.by;
+    }
+
+    @Override
+    public LocalDateTime getLocalDate() {
+        LocalDateTime t = new DateFormatter(this.by).convertToLocalDate(this.by);
+        return t;
     }
 }

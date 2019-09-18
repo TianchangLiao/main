@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateFormatter {
@@ -171,9 +172,37 @@ public class DateFormatter {
         return date != null;
     }
 
-    public LocalDate convertToLocalDate(String sDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        LocalDate parsedDate = LocalDate.parse(sDate, formatter);
+    public LocalDateTime convertToLocalDate(String sDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(getFormat(sDate));
+        LocalDateTime parsedDate = LocalDateTime.parse(sDate, formatter);
         return parsedDate;
     }
+
+    /**
+     * Formats object of LocalDateTime class to return String that is commonly used i.e. dd/MM/yyyy HHmm
+     * @param time LocalDateTime object
+     * @return String that is formatted to dd/MM/yyyy HHmm
+     */
+    public String formatLocalDateTime(LocalDateTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        String formattedTime = time.format(formatter);
+        return formattedTime;
+    }
+    private String getFormat(String date) {
+        int padCount = 0;
+        String format = "";
+        String[] timeType = {"d","M","y","H","H","m","m"};
+        for (int i = 0; i < date.length(); i += 1) {
+            char c = date.charAt(i);
+            if (Character.isDigit(c)) {
+                format += timeType[padCount];
+                if (padCount >= 3) { padCount += 1;}
+            } else {
+                format += c;
+                padCount += 1;
+            }
+        }
+        return format;
+    }
+
 }

@@ -38,4 +38,6 @@ public class DukeResponse {
     public final String REMINDERS_FOUND = "Here are your reminders:\n";
 
     public final String REMINDERS_NOT_FOUND = "☹ OOPS!!! You currently do not have deadlines.\n";
+
+    public final String FREE_TIME_FOUND = "You next free time for the required period is:\n";
 }

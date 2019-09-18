@@ -3,6 +3,7 @@ package duke.task;
 import duke.DateFormatter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event extends Task {
     private final String SYMBOL = "[E]";
@@ -46,8 +47,8 @@ public class Event extends Task {
         return String.format("E | %d | %s | %s",  (isCompleted() ? 1 : 0), this.getDescription(), this.at);
     }
 
-    private LocalDate getLocalDate() {
-        LocalDate t = new DateFormatter(this.at).convertToLocalDate(this.at);
+    public LocalDateTime getLocalDate() {
+        LocalDateTime t = new DateFormatter(this.at).convertToLocalDate(this.at);
         return t;
     }
     @Override
