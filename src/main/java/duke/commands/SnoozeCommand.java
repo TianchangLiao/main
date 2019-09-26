@@ -61,6 +61,7 @@ public class SnoozeCommand extends Command {
         } else {
             message = new DukeResponse().NOT_FOUND;
         }
+
         ui.setMessage(message);
     }
 }
