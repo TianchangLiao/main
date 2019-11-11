@@ -238,6 +238,10 @@ public class Model {
         return shows.reassignSeat(showlocalDate, oldSeat, newSeat);
     }
 
+    public String removeSeats(LocalDate localDate, String... seats) {
+        return shows.removeSeats(localDate, seats);
+    }
+
     private void initLogger() {
         LogManager.getLogManager().reset();
         OPTIXLOGGER.setLevel(Level.ALL);
