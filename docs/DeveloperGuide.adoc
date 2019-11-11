@@ -111,13 +111,13 @@ The sections below give more details of each component.
 
 image::images/devguide/DG_GUI_ClassDiagram.png[width ="600", align="center"]
 
-API: `Link for GUI.files`
+*API*: link:{repoURL}/src/main/java/optix/ui/windows/MainWindow.java[`MainWindow.java`]
 
 The `GUI` consists of a `MainWindow` that is made up of parts e.g `DialogBox`, `HelpWindow`, `SeatDisplayController`, etc.
 `MainWindow` is split into two segment, on the left the display window and on the right the chat box, as show
 in the GUI diagram.
 
-image::images/UI.png[width ="600", align="center"]
+image::images/Ui.png[width ="600", align="center"]
 
 The display window consists of 5 different viewing mode.
 
@@ -139,7 +139,7 @@ The `GUI` component,
 
 === Optix Component
 
-API: `Link for Optix file`
+*API*: link:{repoURL}/src/main/java/optix/Optix.java[`Optix.java`]
 
 `Optix` is the backend software that acts as the intermediary between `GUI` and `Command` logic.
 `Optix`,
@@ -153,22 +153,26 @@ The sections below give more details of each component in `Optix`.
 
 ==== Model Component
 
-API: `Link for Model file`
+image::images/devguide/DG_Model_Structure_Diagram.png[width ="600", align="center"]
 
-`Model` stores the data used for the App. It contains 3 `ShowMap`.
+*API*: link:{repoURL}/src/main/java/optix/commons/Model.java[`Model.java`]
 
-1. *shows*: All the shows that are scheduled for the future.
-2. *showsHistory*: All the shows that are in the past.
-3. *showsGui*: All the shows that are to be displayed on the `GUI` component.
+`Model`,
 
-image::images/devguide/DG_Model_ClassDiagram.png[width ="600", align="center"]
+* Stores the data used for the App. It contains 3 `ShowMap`.
 
-The ShowMap Class Diagram shown is the structure for all ShowMap with the exception of *showsHistory*.
-For *showsHistory* the multiplicity of Seat is 0 as it is irrelevant.
+** *shows*: All the shows that are scheduled for the future.
+** *showsHistory*: All the shows that are in the past.
+** *showsGui*: All the shows that are to be displayed on the `GUI` component.
+
+* Depends on the storage component to store `shows` and `showsHistory`.
+
+[NOTE]
+For *showsHistory*, the multiplicity of `Seat` within `Theatre` is 0 as it is irrelevant.
 
 ==== Storage Component
 
-API: `Link for Storage file`
+*API*: link:{repoURL}/src/main/java/optix/commons/Storage.java[`Storage.java`]
 
 `Storage` reads and writes to its respective .txt files so that information can be loaded on the
 following app launch. The .txt files are saved in `{currDir}/src/main/data`. There is a total of 2
@@ -180,7 +184,7 @@ following app launch. The .txt files are saved in `{currDir}/src/main/data`. The
 
 ==== UI Component
 
-API: `Link for UI file`
+*API*: link:{repoURL}/src/main/java/optix/ui/Ui.java[`Ui.java`]
 
 The `UI` component handles all of `Optix` response. `Optix` response is determined by `Command` component
 and subsequently displayed using `GUI` component.
@@ -198,7 +202,7 @@ The `Parser`,
 
 === Command Component
 
-API: `Link for Command folder`
+*API*: link:{repoURL}/src/main/java/optix/commands[`Command` folder]
 
 All commands found in commands package extends `Command`. The `Command` for the different data structures
 are stored under different subpackages. Currently the commands package consists of 4 different subpackages.
@@ -212,7 +216,7 @@ are stored under different subpackages. Currently the commands package consists 
 == Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-=== [Proposed] View Monthly Revenue Feature
+=== View Monthly Revenue Feature
 Allows user to view their profit for a specific month.
 
 ==== Proposed Implementation
@@ -267,7 +271,7 @@ use the same parameters.
 ** Pros: Archive list and current list will have their own class and reduces dependency.
 ** Cons: Certain code needs to be repeated which may be confusing.
 
-=== [Proposed] Sell Seats Feature
+=== Sell Seats Feature
 Allows user to sell seats for a specific show.
 
 ==== Proposed Implementation
@@ -472,6 +476,25 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 
 Download the AsciiDoc plugin for IntelliJ, this allows you to preview the changes you have made to your `.adoc` files in real-time.
 
+== Logging
+
+Logs are written and saved into `OptixLogger.txt` files. Loggers are created and called in classes that interact with
+user input, such as `Parser`, and the various `Commands`. It only logs the latest user session,
+and any previous log data is overwritten once a new session is begun. This is to avoid clutter and a needlessl
+number of logs. When there is no log file, a new log file is created automatically.
+
+
+[NOTE]
+Different logging levels are used in logging. This is to differentiate the severity level of the log.
+Logger level of `Level.INFO` is primarily used for marking instantiations of classes ,
+and logger level of `Level.Warning` is used for marking Exceptions.
+
+
+=== Editing Logging Configurations
+Edit the specific log configurations in the `initLogger()` function in the desired class.
+Learn more about logging link:{loggingBasicsURL}[here].
+
+:loggingBasicsURL: https://www.loggly.com/ultimate-guide/java-logging-basics/
 
 
 == Testing
@@ -1267,7 +1290,7 @@ All commands, show names and parameters are case insensitive.
 ... Prerequisites: `add` command has an alias `t` +
     Expected: Chat box displays a message showing that the alias `t` has been removed from the `add` command.
 
-. Non-matching aliad
+. Non-matching alias
 
 .. Test case: `remove-alias f|delete`
 ... Prerequisites: `delete` command has an alias other than `f` +
