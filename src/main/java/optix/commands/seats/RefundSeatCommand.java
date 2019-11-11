@@ -17,14 +17,14 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 //author TianchangLiao
-public class RemoveSeatCommand extends Command {
+public class RefundSeatCommand extends Command {
     private String details;
 
     private OptixDateFormatter formatter = new OptixDateFormatter();
     private static final Logger OPTIXLOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String MESSAGE_SHOW_NOT_FOUND = "☹ OOPS!!! The show cannot be found.\n";
 
-    public RemoveSeatCommand(String splitStr) {
+    public RefundSeatCommand(String splitStr) {
         this.details = splitStr;
         initLogger();
     }
@@ -50,7 +50,7 @@ public class RemoveSeatCommand extends Command {
             LocalDate showLocalDate = formatter.toLocalDate(showDate);
 
             if (model.containsKey(showLocalDate) && model.hasSameName(showLocalDate, showName)) {
-                message.append(model.removeSeats(showLocalDate, seats));
+                message.append(model.refundSeats(showLocalDate, seats));
                 storage.write(model.getShows());
             } else {
                 OPTIXLOGGER.log(Level.WARNING, "Show not found: " + showName);
@@ -58,7 +58,7 @@ public class RemoveSeatCommand extends Command {
                 return "";
             }
         } catch (OptixException e) {
-            OPTIXLOGGER.log(Level.WARNING, "Error removing seat. Details:" + this.details);
+            OPTIXLOGGER.log(Level.WARNING, "Error refunding seat. Details:" + this.details);
             message.append(e.getMessage());
             ui.setMessage(message.toString());
             return "";

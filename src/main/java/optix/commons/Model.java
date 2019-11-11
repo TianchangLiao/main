@@ -242,6 +242,10 @@ public class Model {
         return shows.removeSeats(localDate, seats);
     }
 
+    public String refundSeats(LocalDate localDate, String... seats) {
+        return shows.refundSeats(localDate, seats);
+    }
+
     private void initLogger() {
         LogManager.getLogManager().reset();
         OPTIXLOGGER.setLevel(Level.ALL);
